@@ -4,7 +4,11 @@ Node.js based restful api server for Angular, React workshops
 # install
 
   > git clone https://github.com/nodesense/restful-server
+
+
   > cd restful-server
+  
+  
   > npm install
 
 To start server in port 7070, 24 hours expiry for token
