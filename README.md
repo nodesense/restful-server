@@ -26,19 +26,19 @@ Below start server with port number is 9090, expiry in 10 minutes
 
 # API End Points
 
-http://localhost:7070/api/products
-http://localhost:7070/api/brands
-http://localhost:7070/api/cities
-http://localhost:7070/api/states
-http://localhost:7070/api/stores
+    http://localhost:7070/api/products
+    http://localhost:7070/api/brands
+    http://localhost:7070/api/cities
+    http://localhost:7070/api/states
+    http://localhost:7070/api/stores
 
 # Delayed End Points (2 to 8 seconds delay)
 
-http://localhost:7070/delayed/api/products
-http://localhost:7070/delayed/api/brands
-http://localhost:7070/delayed/api/cities
-http://localhost:7070/delayed/api/states
-http://localhost:7070/delayed/api/stores
+    http://localhost:7070/delayed/api/products
+    http://localhost:7070/delayed/api/brands
+    http://localhost:7070/delayed/api/cities
+    http://localhost:7070/delayed/api/states
+    http://localhost:7070/delayed/api/stores
 
 # Secured End Points
 
@@ -63,9 +63,9 @@ We have below user names and password.
 The below APIs must be having Authorization header with "JWT \" for all GET, POST, PUT, DELETE requests
 
             Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjEsImV4cCI6MTQ5ODY1ODY4NTc4Nn0.2IuvLDf_-ipiRwQFGGX4nPNAcE1VwlX0bcLThvlUP88-p":
-        
-http://localhost:7070/secured/api/products
-http://localhost:7070/secured/api/brands
-http://localhost:7070/secured/api/cities
-http://localhost:7070/secured/api/states
-http://localhost:7070/secured/api/stores
+            
+    http://localhost:7070/secured/api/products
+    http://localhost:7070/secured/api/brands
+    http://localhost:7070/secured/api/cities
+    http://localhost:7070/secured/api/states
+    http://localhost:7070/secured/api/stores
