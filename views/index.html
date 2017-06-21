@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NodeSense-Restful APIs</title>
+</head>
+<body>
+
+    <h1>API End Points</h2>
+    
+    <ul>
+    <% endPoints.forEach(function(endPoint){ %>
+        <li>
+         <a href="http://localhost:<%=port%>/api/<%=endPoint%>"> 
+             http://localhost:<%=port%>/api/<%=endPoint%> 
+        </a>
+         </li>
+    <% }) %>
+     </ul>
+    
+    <h1>Delayed End Points (2 to 8 seconds delay)</h2>
+ 
+    <ul>
+    <% endPoints.forEach(function(endPoint){ %>
+        <li>
+         <a href="http://localhost:<%=port%>/delayed/api/<%=endPoint%>"> 
+             http://localhost:<%=port%>/delayed/api/<%=endPoint%> 
+        </a>
+         </li>
+    <% }) %>
+     </ul>
+
+
+    <h1>Secured End Points </h2>
+
+    <p> 
+        to login, send 
+
+        <pre>
+            POST /oauth/token
+            ..
+            Content-Type: application/json
+
+            {
+                "username": "admin",
+                "password": "admin"
+            }
+        </pre>
+
+        <p> Server sends back token, expires and identity information</p>
+
+        We have below user names and password.
+
+        <ol>
+            <li> username: admin, password: admin</li>
+            <li> username: staff, password: staff</li>
+            <li> username: user, password: user</li>
+        </ol>
+
+    </p>
+
+    <p> The below APIs must be having Authorization header with "JWT \<token\>"
+        for all GET, POST, PUT, DELETE requests
+
+
+        <pre>
+            Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjEsImV4cCI6MTQ5ODY1ODY4NTc4Nn0.2IuvLDf_-ipiRwQFGGX4nPNAcE1VwlX0bcLThvlUP88-p":
+        </pre>
+
+
+
+    </p>
+
+    
+    <ul>
+    <% endPoints.forEach(function(endPoint){ %>
+        <li>
+         <a href="http://localhost:<%=port%>/secured/api/<%=endPoint%>"> 
+             http://localhost:<%=port%>/secured/api/<%=endPoint%> 
+        </a>
+         </li>
+    <% }) %>
+     </ul>
+
+</body>
+</html>
