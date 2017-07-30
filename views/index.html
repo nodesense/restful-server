@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NodeSense-Restful APIs</title>
+
+    <script src="/node_modules/socket.io-client/dist/socket.io.js"></script>
+
 </head>
 <body>
+
+<script>
+  var socket = io();
+
+   socket.on('offer', function (offer) {
+       console.log("offer ", offer);
+   })
+</script>
 
     <h1>API End Points</h2>
     

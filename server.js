@@ -4,30 +4,33 @@
 //support for oauth authentication
 //just for angular-reactjs-workshop
 
+const express = require("express");
 const jsonServer = require('json-server')
 
 const jwt = require('jwt-simple');
 const _ = require("lodash");
 const moment = require('moment');
 
-const server = jsonServer.create()
+const app = jsonServer.create()
+
 
 const ejs = require("ejs");
 const path = require("path");
 
-server.set('view engine', 'html');
-server.engine('html', ejs.renderFile);
+app.set('view engine', 'html');
+app.engine('html', ejs.renderFile);
 //set views directory
-server.set('views', path.join(__dirname, './views'));
+app.set('views', path.join(__dirname, './views'));
 
+app.use('/node_modules', express.static('node_modules'));
     
 
-server.set('jwtTokenSecret', 'yX!fglBbZr');
+app.set('jwtTokenSecret', 'yX!fglBbZr');
 
-server.disable("etag");
+app.disable("etag");
 
 const bodyParser = require('body-parser')
-server.use(bodyParser.json());
+app.use(bodyParser.json());
 
 
 const parseArgs = require('minimist') (process.argv.slice(2))
@@ -44,6 +47,8 @@ var expiryInMinutes = parseInt(parseArgs.expiry) || 24 * 60;
 
 console.log("expiry in minutes ", expiryInMinutes);
 
+var offerTime = parseInt(parseArgs.offer) || 1000;
+
 
 var endPoints = [ 
     'products',
@@ -54,7 +59,7 @@ var endPoints = [
         "orders"
 ]
 
-server.get('/', function(req, res) {
+app.get('/', function(req, res) {
 
 
     res.render("index", {port, endPoints})
@@ -76,7 +81,7 @@ if (commandLine.indexOf("nocors") >= 0) {
 }
 
 var middlewares = jsonServer.defaults(defaultsOpts)
-server.use(middlewares)
+app.use(middlewares)
 
 
 
@@ -181,11 +186,11 @@ function validateToken(req, res, next) {
     next();
 }
 
-server.post('/oauth/token', authenticateUser);
+app.post('/oauth/token', authenticateUser);
 
-server.use("/secured", validateToken)
+app.use("/secured", validateToken)
 
-server.use(function(req, res, next){
+app.use(function(req, res, next){
     if (req.url.indexOf("/secured") > -1) {
             req.url = req.url.replace("/secured", ""); 
              
@@ -195,7 +200,7 @@ server.use(function(req, res, next){
 })
 
 
-server.use(function(req, res, next){
+app.use(function(req, res, next){
        if (req.url.indexOf("/delayed") > -1) {
             //delay minimum 2 - 7 seconds
             req.url = req.url.replace("/delayed", ""); 
@@ -216,7 +221,7 @@ if (commandLine.indexOf("auth") >= 0) {
 
 var router = jsonServer.router('./db.json')
 
-server.get('/api/exist/:model/:property/:value', function(req, res){
+app.get('/api/exist/:model/:property/:value', function(req, res){
     var model = req.params['model'];
     var property = req.params['property']
     var value = req.params['value'];
@@ -247,11 +252,44 @@ server.get('/api/exist/:model/:property/:value', function(req, res){
 })
 
 
-server.use('/api', router)
+app.use('/api', router)
 
 var errorRouter = jsonServer.router('./logs.json')
 
-server.use('/log', errorRouter)
+app.use('/log', errorRouter)
+
+
+
+var server = require('http').Server(app);
+
+var io = require('socket.io')(server);
+io.on('connection', function(socket){
+  console.log('a user connected');
+   
+  var handle = setInterval(function() {
+       var item = router.db.get("products").sample();
+        // .filter(function(m) {
+        //     var m = m[property].toString().toLowerCase();
+        //     return m == value;
+        // })
+       // .take(1)
+       // .value()
+
+      var product = _.clone(item);
+      product.price = product.price - Math.floor(Math.random() * product.price);
+      product.stock = Math.ceil(Math.random() * 10);
+
+    socket.emit("offer", product)
+  }, offerTime);
+
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+    clearInterval(handle);
+    handle = null;
+  });
+
+});
+
 
 server.listen(port, function (err) {
     if (!err) {
