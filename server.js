@@ -127,7 +127,7 @@ function authenticateUser(req, res) {
     var token = jwt.encode({
     iss: user.id,
     exp: expires
-    }, server.get('jwtTokenSecret'));
+    }, app.get('jwtTokenSecret'));
 
     //remove password before sending to client
     var safeUser = _.clone(user);
@@ -161,7 +161,7 @@ function validateToken(req, res, next) {
     }
 
     try {
-        var decoded = jwt.decode(token, server.get('jwtTokenSecret'));
+        var decoded = jwt.decode(token, app.get('jwtTokenSecret'));
 
         if (decoded.exp <= Date.now()) {
             console.error("expired token");
@@ -213,11 +213,11 @@ app.use(function(req, res, next){
         }
 })
 
-if (commandLine.indexOf("auth") >= 0) {
-     console.log("Authentication enabled");
-     server.post('/oauth/token', authenticateUser)
-     server.use(validateToken); 
-}
+// if (commandLine.indexOf("auth") >= 0) {
+//      console.log("Authentication enabled");
+//      server.post('/oauth/token', authenticateUser)
+//      server.use(validateToken); 
+// }
 
 var router = jsonServer.router('./db.json')
 
