@@ -256,14 +256,7 @@ app.get('/api/exist/:model/:property/:value', function(req, res){
 })
 
 
-app.use('/api', router)
-
-var errorRouter = jsonServer.router('./logs.json')
-
-app.use('/log', errorRouter)
-
-
-app.post("/email", function(req, res) {
+app.post("/api/email", function(req, res) {
     console.log("Req body ", req.body);
     const email = req.body;
    
@@ -314,6 +307,14 @@ app.post("/email", function(req, res) {
     });
  
 });
+
+
+
+app.use('/api', router)
+
+var errorRouter = jsonServer.router('./logs.json')
+
+app.use('/logs', errorRouter)
 
 
 

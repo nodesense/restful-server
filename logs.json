@@ -1,0 +1,22 @@
+{
+  "errors": [
+    {
+      "level": "info",
+      "message": "info not found",
+      "id": 1
+    },
+    {
+      "level": "error",
+      "message": "exception route ",
+      "trace": "test test test",
+      "id": 2
+    }
+  ],
+  "activities": [
+    {
+      "operation": "create",
+      "message": "created product with id  12345",
+      "id": 1
+    }
+  ]
+}
