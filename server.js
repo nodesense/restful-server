@@ -10,12 +10,18 @@ const jsonServer = require('json-server')
 const jwt = require('jwt-simple');
 const _ = require("lodash");
 const moment = require('moment');
+const nodemailer = require('nodemailer');
+const jsonfile = require("jsonfile");
+
 
 const app = jsonServer.create()
 
 
 const ejs = require("ejs");
 const path = require("path");
+
+const config = jsonfile.readFileSync("settings.json");
+//console.log("Config ", config)
 
 app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
@@ -82,8 +88,6 @@ if (commandLine.indexOf("nocors") >= 0) {
 
 var middlewares = jsonServer.defaults(defaultsOpts)
 app.use(middlewares)
-
-
 
 var users = [
     {
@@ -257,6 +261,57 @@ app.use('/api', router)
 var errorRouter = jsonServer.router('./logs.json')
 
 app.use('/log', errorRouter)
+
+
+app.post("/email", function(req, res) {
+    console.log("Req body ", req.body);
+    const email = req.body;
+   
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: config.mail.host,
+        port: config.mail.port,
+        secure: config.mail.secure, // true for 465, false for other ports
+        auth: {
+            user: config.mail.username, // generated ethereal user
+            pass: config.mail.password // generated ethereal password
+        }
+    });
+
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"Fred Foo 👻" <foo@example.com>', // sender address
+        to: email.to, // list of receivers
+        subject: email.subject, // Subject line
+        text: email.message, // plain text body
+        html: '<b>' + email.message + '</b>' // html body
+    };
+
+    console.log("Sending email ");
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log("Error sending email ", error)
+             
+            res.status(500).json({result: false, 
+                                  error: error})
+            return;
+        }
+        console.log('Message sent: %s', info.messageId);
+        // Preview only available when sending through an Ethereal account
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+        
+        res.json({
+            result: true,
+            msgId: info.messageId,
+            preview: nodemailer.getTestMessageUrl(info)
+        })
+    });
+ 
+});
 
 
 

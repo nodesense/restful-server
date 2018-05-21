@@ -11,6 +11,47 @@ Node.js based restful api server for Angular, React workshops
   
   > npm install
 
+## email configuration
+
+Update settings.json file for email server configuration. Please do not leak your personal email 
+addresses
+
+You can use below services for email.
+
+- https://ethereal.email/  Your emails are never delivered, good for testing, development
+- https://mail.yandex.com don't spam
+
+ Non-secure configuration
+
+```json
+{
+    "host": "smtp.ethereal.email",
+    "port": 587,
+    "secure": false, // true for 465, false for other ports
+    "auth": {
+        "user": "test", // generated ethereal user
+        "pass": "pass" // generated ethereal password
+    }
+}
+```
+
+
+ secure configuration
+ 
+```json
+{
+    "host": "smtp.ethereal.email",
+    "port": 465,
+    "secure": true,
+    "auth": {
+        "user": "test",  
+        "pass": "pass"  
+    }
+}
+```
+
+## Start the server
+
 To start server in port 7070, 24 hours expiry for token
 
   > npm start
