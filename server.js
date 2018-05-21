@@ -280,12 +280,14 @@ app.post("/email", function(req, res) {
 
     // setup email data with unicode symbols
     let mailOptions = {
-        from: '"Fred Foo 👻" <foo@example.com>', // sender address
+        from: config.mail.from, // sender address
         to: email.to, // list of receivers
         subject: email.subject, // Subject line
         text: email.message, // plain text body
         html: '<b>' + email.message + '</b>' // html body
     };
+
+    console.log(mailOptions)
 
     console.log("Sending email ");
     // send mail with defined transport object

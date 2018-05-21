@@ -1,0 +1,10 @@
+{
+    "mail": {
+        "host": "smtp.yandex.com",
+        "port": 465,
+        "secure": true, 
+        "from": "*******@yandex.com",
+        "username": "*******@yandex.com",  
+        "password": "******"
+    }
+}
