@@ -107,7 +107,7 @@ Caution: Please create email id free for this purpose, do not leak password in t
 
 If you really want to send email, I would recommend to use simple services likes Yandex email services or other similar services which provides you smtp to send email, easy and quick to create, doesn’t require phone number or complex process to create email.
 
-##### Don't leak your password, you are responsible if you are victim of fraud
+### Don't leak your password, you are responsible if you are victim of fraud
 
 To send email,
 
