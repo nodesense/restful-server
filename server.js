@@ -1,3 +1,7 @@
+//WARNING: This is not production code, not to be used for references, best practices
+// hack api to provide file upload, jwt, email featuers on top of json server
+// https://github.com/typicode/json-server
+
 // api-server.js
 //RESTful API server using json-server module
 //support for enable/disable cors
@@ -12,13 +16,31 @@ const _ = require("lodash");
 const moment = require('moment');
 const nodemailer = require('nodemailer');
 const jsonfile = require("jsonfile");
+const multer = require('multer');
 
+const ejs = require("ejs");
+const path = require("path");
+var mkdirp = require('mkdirp');
+
+mkdirp.sync("uploads")
 
 const app = jsonServer.create()
 
 
-const ejs = require("ejs");
-const path = require("path");
+
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        console.log("FIle ", file)
+     cb(null,  Date.now() + "-" + file.originalname)
+     //cb(null, file.fieldname)
+    }
+});
+
+var upload = multer({storage: storage});
+var serveIndex = require('serve-index')
 
 const config = jsonfile.readFileSync("settings.json");
 //console.log("Config ", config)
@@ -30,6 +52,9 @@ app.set('views', path.join(__dirname, './views'));
 
 app.use('/node_modules', express.static('node_modules'));
     
+app.use('/uploads', express.static('uploads'));
+app.use('/uploads', serveIndex(__dirname + '/uploads'));
+
 
 app.set('jwtTokenSecret', 'yX!fglBbZr');
 
@@ -45,8 +70,14 @@ const parseArgs = require('minimist') (process.argv.slice(2))
 console.log("options ", parseArgs);
 
 var port = parseInt(parseArgs.port) || 7070;
-
 console.log("port ", port);
+var hostname = parseInt(parseArgs.host) || 'localhost';
+console.log("hostname ", hostname);
+
+//http/https
+var scheme = parseInt(parseArgs.scheme) || 'http';
+console.log("scheme ", scheme);
+
 
 //default 24 hrs
 var expiryInMinutes = parseInt(parseArgs.expiry) || 24 * 60;
@@ -62,13 +93,18 @@ var endPoints = [
     'cities',
     'states',
     'stores',
-        "orders"
+    "orders"
 ]
 
 app.get('/', function(req, res) {
+    // now we pick end points from json file
+    endPoints = []
+    for (k in router.db.__wrapped__) {
+        console.log("K is ", k);
+        endPoints.push(k)
+    }
 
-
-    res.render("index", {port, endPoints})
+    res.render("index", {port, hostname, scheme, endPoints})
     
 })
 
@@ -223,6 +259,20 @@ app.use(function(req, res, next){
 //      server.use(validateToken); 
 // }
 
+app.post('/upload', upload.single('document'), (req, res, next) => {
+     
+    console.log("** Uploaded file ", req.file.filename);
+    res.json({'message': 'File uploaded successfully',
+                'result': true,
+                fileName: req.file.filename,
+                path: '/uploads/' +  req.file.filename, 
+                url: `http://${hostname}:${port}/uploads/${req.file.filename}`
+            });
+    
+});
+
+
+
 var router = jsonServer.router('./db.json')
 
 app.get('/api/exist/:model/:property/:value', function(req, res){
@@ -308,15 +358,11 @@ app.post("/api/email", function(req, res) {
  
 });
 
-
-
 app.use('/api', router)
 
 var errorRouter = jsonServer.router('./logs.json')
 
 app.use('/logs', errorRouter)
-
-
 
 var server = require('http').Server(app);
 

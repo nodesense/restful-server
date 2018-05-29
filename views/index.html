@@ -19,13 +19,54 @@
    })
 </script>
 
-    <h1>API End Points</h2>
+    <h1>JSON RESTFul Server API End Points</h2>
+
+    <p> Using <a href="https://github.com/typicode/json-server">https://github.com/typicode/json-server</a>, 
+        added JWT and Delayed end points for workshops
+        Please refer the same for detailed documentation for filter, sort, query, pagination
+    </p>
+
+    <p>Note: Username and passwords kept transparent, 
+        servered from json file as raw data. 
+        In real scenarios, password and other sensitive data are not transmitted.
+    </p>
+
+
+    <p>Note: Server doesn't do any data validation.
+        Do you want to add more data, open db.json, add entries, restart the server?
+        Supported methods
+
+        <pre>
+            to get all resources
+            GET /api/products
+            
+            to get a specific resource object by id
+            GET /api/products/1
+            
+            to create new resource, server would generate unique id
+            POST /api/products 
+                {followed by json data}
+
+            to update existing resource
+            PUT  /api/products/1 
+                {followed by json data}
+
+            to delete existing resource
+            DELETE /api/products/1 
+
+            to update (patch) existing resource with specific field name
+            PATCH /api/products/1
+                    {followed by json data with specific field to update}
+        </pre>
+    </p>
+    
+    
     
     <ul>
     <% endPoints.forEach(function(endPoint){ %>
         <li>
-         <a href="http://localhost:<%=port%>/api/<%=endPoint%>"> 
-             http://localhost:<%=port%>/api/<%=endPoint%> 
+         <a href="http://<%=hostname%>:<%=port%>/api/<%=endPoint%>"> 
+             http://<%=hostname%>:<%=port%>/api/<%=endPoint%> 
         </a>
          </li>
     <% }) %>
@@ -36,13 +77,12 @@
     <ul>
     <% endPoints.forEach(function(endPoint){ %>
         <li>
-         <a href="http://localhost:<%=port%>/delayed/api/<%=endPoint%>"> 
-             http://localhost:<%=port%>/delayed/api/<%=endPoint%> 
+         <a href="http://<%=hostname%>:<%=port%>/delayed/api/<%=endPoint%>"> 
+             http://<%=hostname%>:<%=port%>/delayed/api/<%=endPoint%> 
         </a>
          </li>
     <% }) %>
      </ul>
-
 
     <h1>Secured End Points </h2>
     
@@ -50,7 +90,7 @@
        for Authentication and Authorization requirements
     </p>
     <pre>
-        http://localhost:<%=port%>/secured
+        http://<%=hostname%>:<%=port%>/secured
     </pre>
 
     <p> 
@@ -95,12 +135,68 @@
     <ul>
     <% endPoints.forEach(function(endPoint){ %>
         <li>
-         <a href="http://localhost:<%=port%>/secured/api/<%=endPoint%>"> 
-             http://localhost:<%=port%>/secured/api/<%=endPoint%> 
+         <a href="http://<%=hostname%>:<%=port%>/secured/api/<%=endPoint%>"> 
+             http://<%=hostname%>:<%=port%>/secured/api/<%=endPoint%> 
         </a>
          </li>
     <% }) %>
      </ul>
+
+
+     <h1> Errors and Activities kept in logs.json file, we have below end points</h2>
+
+    <p>Note: Use separate end points, do not use delayed, secured for errors and activities</p>
+
+        <ul>
+            <% ["errors", "activities"].forEach(function(endPoint){ %>
+                <li>
+                 <a href="http://<%=hostname%>:<%=port%>/logs/<%=endPoint%>"> 
+                     http://<%=hostname%>:<%=port%>/logs/<%=endPoint%> 
+                </a>
+                 </li>
+            <% }) %>
+             </ul>
+
+
+    <h1>Upload a file</h1>
+
+    <p>Access All files in /uploads directory
+        <a href="http://<%=hostname%>:<%=port%>/uploads">
+            Uploaded Files 
+        </a>
+    </p>
+    <p>Example</p>
+
+    <pre>
+            
+
+    &lt;form action=&quot;/upload&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+        Select image to upload:
+        &lt;input type=&quot;file&quot; name=&quot;document&quot; id=&quot;imageToUpload&quot;&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Upload Image&quot; name=&quot;submit&quot;&gt;
+    &lt;/form&gt;
+
+       
+    </pre>
+    
+    <pre> 
+        Returns json response 
+
+        {
+            "message": "File uploaded successfully",
+            "result": true,
+            "filePath": "/uploads/1527584529745-TODO.txt"
+          }
+
+    </pre>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        Select image to upload:
+        <input type="file" name="document" id="imageToUpload">
+        <input type="submit" value="Upload Image" name="submit">
+    </form>
+
+           
 
 </body>
 </html>

@@ -1,4 +1,37 @@
 {
+  "users": [
+    {
+        "id": 1,
+        "name": "Administrator",
+        "roles": ["admin", "staff", "user"],
+        "username": "admin",
+        "password": "admin"
+    },
+
+    {
+        "id":2,
+        "name": "Staff",
+        "roles": ["staff", "user"],
+        "username": "staff",
+        "password": "staff"
+    },
+
+    {
+        "id": 3,
+        "name": "User",
+        "roles": ["user"],
+        "username": "user",
+        "password": "user"
+    }
+],
+
+  "catalogs": [
+    {
+      "name": "Interior 1",
+      "type": "t1",
+      "id": 1
+    }
+  ],
   "stores": [],
   "orders": [
     {
