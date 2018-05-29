@@ -46,6 +46,22 @@ Note: Server doesn't do any data validation.
   
   > npm install
 
+  > npm start
+
+## Start the server with different port and expiry time
+
+To start server in localhost, port 7070 with 24 hours expiry for token
+
+  > npm start
+
+To start server in specific port, specific  expiry minutes for token
+
+Below start server with port number is 9090, expiry in 10 minutes
+
+> npm start -- --port 9090  --expiry 10
+
+
+
 ## email configuration
 
 Update settings.json file for email server configuration. Please do not leak your personal email 
@@ -84,20 +100,6 @@ You can use below services for email.
     }
 }
 ```
-
-## Start the server
-
-To start server in port 7070, 24 hours expiry for token
-
-  > npm start
-
-
-To start server in specific port, specific  expiry minutes for token
-
-Below start server with port number is 9090, expiry in 10 minutes
-
-> npm start -- --port 9090  --expiry 10
-
 
 
 # API End Points
@@ -178,11 +180,11 @@ Errors and activities are kept in logs.json file, we have below end points
 
 For Errors
 
-    http://localhost:7079/logs/errors
+    http://localhost:7070/logs/errors
 
 For activities log,
 
-    http://localhost:7079/logs/activities
+    http://localhost:7070/logs/activities
 
 
 
@@ -191,16 +193,18 @@ For activities log,
 
     Access All files in /uploads directory
     http://localhost:7070/uploads 
-    
-    <p>Example, NOTE: the filename should be name="document"</p>
+
+    Example, NOTE: the filename should be name="document"
   
+ 
 
-    &lt;form action=&quot;/upload&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+    <h4>Example upload</h4>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
         Select image to upload:
-        &lt;input type=&quot;file&quot; name=&quot;document&quot; id=&quot;imageToUpload&quot;&gt;
-        &lt;input type=&quot;submit&quot; value=&quot;Upload Image&quot; name=&quot;submit&quot;&gt;
-    &lt;/form&gt;
-
+        <input type="file" name="document" id="imageToUpload">
+        <input type="submit" value="Upload Image" name="submit">
+    </form>
         
     
  
@@ -214,10 +218,3 @@ For activities log,
 
      
 
-    <h4>Example upload</h4>
-
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        Select image to upload:
-        <input type="file" name="document" id="imageToUpload">
-        <input type="submit" value="Upload Image" name="submit">
-    </form>
