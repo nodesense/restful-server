@@ -142,6 +142,29 @@
     <% }) %>
      </ul>
 
+    <h2>Check if exists properties</h2>
+    <p>Sometimes you may want to check if a field value exist or not</p>
+
+    <p>Use below API for same 
+
+        http://localhost:7070/api/exist/users/username/admin10
+        <br />
+
+        http://localhost:7070/api/exist/products/id/1000
+
+        <br />
+        
+        The syntax is 
+        <br />
+        
+        http://localhost:7070/api/exist/collection-name/fieldname/expected-value
+
+        <br />
+        
+        returns json result with true or false value
+
+    </p>
+
 
      <h1> Errors and Activities kept in logs.json file, we have below end points</h2>
 
@@ -158,6 +181,8 @@
              </ul>
 
 
+
+
     <h1>Upload a file</h1>
 
     <p>Access All files in /uploads directory
@@ -165,7 +190,7 @@
             Uploaded Files 
         </a>
     </p>
-    <p>Example</p>
+    <p>Example, NOTE: the filename should be name="document"</p>
 
     <pre>
             
@@ -189,6 +214,8 @@
           }
 
     </pre>
+
+    <h4>Example upload</h4>
 
     <form action="/upload" method="post" enctype="multipart/form-data">
         Select image to upload:

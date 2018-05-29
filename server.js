@@ -86,6 +86,8 @@ console.log("expiry in minutes ", expiryInMinutes);
 
 var offerTime = parseInt(parseArgs.offer) || 1000;
 
+var router = jsonServer.router('./db.json')
+
 
 var endPoints = [ 
     'products',
@@ -96,11 +98,13 @@ var endPoints = [
     "orders"
 ]
 
+
+
 app.get('/', function(req, res) {
     // now we pick end points from json file
     endPoints = []
     for (k in router.db.__wrapped__) {
-        console.log("K is ", k);
+        // console.log("K is ", k);
         endPoints.push(k)
     }
 
@@ -124,45 +128,29 @@ if (commandLine.indexOf("nocors") >= 0) {
 
 var middlewares = jsonServer.defaults(defaultsOpts)
 app.use(middlewares)
-
-var users = [
-    {
-        id: 1,
-        name: 'Administrator',
-        roles: ['admin', 'staff', 'user'],
-        username: 'admin',
-        password: 'admin'
-    },
-
-    {
-        id:2,
-        name: 'Staff',
-        roles: ['staff', 'user'],
-        username: 'staff',
-        password: 'staff'
-    },
-
-    {
-        id: 3,
-        name: 'User',
-        roles: ['user'],
-        username: 'user',
-        password: 'user'
-    }
-]
-
+ 
 
 function authenticateUser(req, res) {
     console.log("auth ", req.body.username);
      
-    var user = _.find(users, function(user) { return user.username == req.body.username && user.password == req.body.password; });
+     
 
-    if (!user) {
-             res.sendStatus(403);
+    // take from db
+    var usersMatched = router.db.get("users")
+    .filter(function(user) {
+        return user.username == req.body.username && user.password == req.body.password; 
+    })
+    .take(1)
+    .value()
+
+    if (!usersMatched || usersMatched.length == 0) {
+        res.sendStatus(403);
              return;
     }
 
-
+    var user = usersMatched[0]
+    console.log("Found user ", user);
+    
     var expires = moment().add('minutes', expiryInMinutes).valueOf();
     var token = jwt.encode({
     iss: user.id,
@@ -209,13 +197,24 @@ function validateToken(req, res, next) {
             return;
         }
 
-        var user = _.find(users, function(user) { return user.id == decoded.iss});
 
-        if (!user) {
-            console.error("user not found");
-            res.status(400).json({error: 'user not found'});
-            return;
+            // take from db
+        var usersMatched = router.db.get("users")
+        .filter(function(user) {
+            return user.id == decoded.iss; 
+        })
+        .take(1)
+        .value()
+
+        if (!usersMatched || usersMatched.length == 0) {
+             console.error("user not found");
+             res.status(400).json({error: 'user not found'});
+             return;
         }
+
+        var user = usersMatched[0]
+        console.log("Found user ", user);
+
     }catch(ex) {
         console.error("unexpected error")
         res.status(400).json({error: 'may be forged token'});
@@ -273,7 +272,6 @@ app.post('/upload', upload.single('document'), (req, res, next) => {
 
 
 
-var router = jsonServer.router('./db.json')
 
 app.get('/api/exist/:model/:property/:value', function(req, res){
     var model = req.params['model'];

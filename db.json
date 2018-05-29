@@ -1,30 +1,36 @@
 {
   "users": [
     {
-        "id": 1,
-        "name": "Administrator",
-        "roles": ["admin", "staff", "user"],
-        "username": "admin",
-        "password": "admin"
+      "id": 1,
+      "name": "Administrator",
+      "roles": [
+        "admin",
+        "staff",
+        "user"
+      ],
+      "username": "admin",
+      "password": "admin"
     },
-
     {
-        "id":2,
-        "name": "Staff",
-        "roles": ["staff", "user"],
-        "username": "staff",
-        "password": "staff"
+      "id": 2,
+      "name": "Staff",
+      "roles": [
+        "staff",
+        "user"
+      ],
+      "username": "staff",
+      "password": "staff"
     },
-
     {
-        "id": 3,
-        "name": "User",
-        "roles": ["user"],
-        "username": "user",
-        "password": "user"
+      "id": 3,
+      "name": "User",
+      "roles": [
+        "user"
+      ],
+      "username": "user",
+      "password": "user"
     }
-],
-
+  ],
   "catalogs": [
     {
       "name": "Interior 1",
@@ -191,7 +197,7 @@
       "display": "4.3\" 480 x 800 SLCD",
       "gpu": "Adreno 205",
       "id": 6,
-      "name": "HTC Desire 2001",
+      "name": "HTC Desire 2002",
       "os": "Android 2.2",
       "ram": "768 MB",
       "size": "98.7 cm3 123 x 68 x 11.8 mm",
@@ -1759,6 +1765,14 @@
       "year": 2017,
       "brandId": "5",
       "id": 102
+    },
+    {
+      "name": "New product 102",
+      "price": 325,
+      "year": 2019,
+      "weight": "90 g",
+      "brandId": "5",
+      "id": 103
     }
   ],
   "states": [
