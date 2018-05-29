@@ -27,10 +27,10 @@ You can use below services for email.
 {
     "host": "smtp.ethereal.email",
     "port": 587,
-    "secure": false, // true for 465, false for other ports
+    "secure": false,  
     "auth": {
-        "user": "test", // generated ethereal user
-        "pass": "pass" // generated ethereal password
+        "user": "test",  
+        "pass": "pass"  
     }
 }
 ```
