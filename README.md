@@ -101,6 +101,25 @@ You can use below services for email.
 }
 ```
 
+# Email example
+
+Caution: Please create email id free for this purpose, do not leak password in the configuration file. For testing purpose, use https://ethernal.email, your email shall not be delivered, but you have have overview of it.
+
+If you really want to send email, I would recommend to use simple services likes Yandex email services or other similar services which provides you smtp to send email, easy and quick to create, doesn’t require phone number or complex process to create email.
+
+##### Don't leak your password, you are responsible if you are victim of fraud
+
+To send email,
+
+    POST /api/email    
+    {
+    “to”: “someone@example.com”,
+    “subject”: “Welcome Email”,
+    “message”: “Here your messages goes”
+    }
+
+    the server respond with id of the message, and preview url if ethernal.email used.
+    
 
 # API End Points
 
@@ -189,7 +208,7 @@ For activities log,
 
 
 
-## Upload a file<
+## Upload a file
 
     Access All files in /uploads directory
     http://localhost:7070/uploads 
