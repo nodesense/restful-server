@@ -71,7 +71,7 @@ console.log("options ", parseArgs);
 
 var port = parseInt(parseArgs.port) || 7070;
 console.log("port ", port);
-var host = parseInt(parseArgs.host) || 'localhost';
+var host =  parseArgs.host || 'localhost';
 console.log("hostname ", host);
 
 //http/https
