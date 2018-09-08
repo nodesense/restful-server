@@ -143,21 +143,19 @@
      </ul>
 
     <h2>Check if exists properties</h2>
-    <p>Sometimes you may want to check if a field value exist or not</p>
+    <p>Sometimes you may want to check if a field value exist or not for validation</p>
 
     <p>Use below API for same 
 
-        http://localhost:7070/api/exist/users/username/admin10
-        <br />
-
-        http://localhost:7070/api/exist/products/id/1000
-
+        <a href="http://<%=host%>:<%=port%>/exist/products/id/10"> 
+            http://<%=host%>:<%=port%>/exist/products/id/10
+        </a>
         <br />
         
         The syntax is 
         <br />
         
-        http://localhost:7070/api/exist/collection-name/fieldname/expected-value
+        http://localhost:7070/api/exist/{{collection-name}}/{{fieldname}}/{{expected-value}}
 
         <br />
         
