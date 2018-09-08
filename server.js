@@ -227,6 +227,19 @@ function validateToken(req, res, next) {
 
 app.post('/oauth/token', authenticateUser);
 
+app.use(function(req, res, next){
+    if (req.url.indexOf("/delayed") > -1) {
+         //delay minimum 2 - 7 seconds
+         req.url = req.url.replace("/delayed", ""); 
+
+         setTimeout(function(){
+             next();      
+         }, Math.floor(2 + Math.random() * 7) * 1000);
+     } else {
+         next();
+     }
+})
+
 app.use("/secured", validateToken)
 
 app.use(function(req, res, next){
@@ -239,18 +252,7 @@ app.use(function(req, res, next){
 })
 
 
-app.use(function(req, res, next){
-       if (req.url.indexOf("/delayed") > -1) {
-            //delay minimum 2 - 7 seconds
-            req.url = req.url.replace("/delayed", ""); 
 
-            setTimeout(function(){
-                next();      
-            }, Math.floor(2 + Math.random() * 7) * 1000);
-        } else {
-            next();
-        }
-})
 
 // if (commandLine.indexOf("auth") >= 0) {
 //      console.log("Authentication enabled");
