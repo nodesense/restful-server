@@ -71,8 +71,8 @@ console.log("options ", parseArgs);
 
 var port = parseInt(parseArgs.port) || 7070;
 console.log("port ", port);
-var hostname = parseInt(parseArgs.host) || 'localhost';
-console.log("hostname ", hostname);
+var host = parseInt(parseArgs.host) || 'localhost';
+console.log("hostname ", host);
 
 //http/https
 var scheme = parseInt(parseArgs.scheme) || 'http';
@@ -108,7 +108,7 @@ app.get('/', function(req, res) {
         endPoints.push(k)
     }
 
-    res.render("index", {port, hostname, scheme, endPoints})
+    res.render("index", {port, host, scheme, endPoints})
     
 })
 
@@ -265,7 +265,7 @@ app.post('/upload', upload.single('document'), (req, res, next) => {
                 'result': true,
                 fileName: req.file.filename,
                 path: '/uploads/' +  req.file.filename, 
-                url: `http://${hostname}:${port}/uploads/${req.file.filename}`
+                url: `http://${host}:${port}/uploads/${req.file.filename}`
             });
     
 });

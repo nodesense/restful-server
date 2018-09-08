@@ -4,7 +4,7 @@
       "append": true,
       "script": "server.js",
       "sourceDir": "/root/restful-server",
-      "args": ["--port", "7070", "--hostname", "code.nodesense.ai"]
+      "args": ["--port", "7070", "--host", "code.nodesense.ai"]
     }
   ]
   

@@ -65,8 +65,8 @@
     <ul>
     <% endPoints.forEach(function(endPoint){ %>
         <li>
-         <a href="http://<%=hostname%>:<%=port%>/api/<%=endPoint%>"> 
-             http://<%=hostname%>:<%=port%>/api/<%=endPoint%> 
+         <a href="http://<%=host%>:<%=port%>/api/<%=endPoint%>"> 
+             http://<%=host%>:<%=port%>/api/<%=endPoint%> 
         </a>
          </li>
     <% }) %>
@@ -77,8 +77,8 @@
     <ul>
     <% endPoints.forEach(function(endPoint){ %>
         <li>
-         <a href="http://<%=hostname%>:<%=port%>/delayed/api/<%=endPoint%>"> 
-             http://<%=hostname%>:<%=port%>/delayed/api/<%=endPoint%> 
+         <a href="http://<%=host%>:<%=port%>/delayed/api/<%=endPoint%>"> 
+             http://<%=host%>:<%=port%>/delayed/api/<%=endPoint%> 
         </a>
          </li>
     <% }) %>
@@ -90,7 +90,7 @@
        for Authentication and Authorization requirements
     </p>
     <pre>
-        http://<%=hostname%>:<%=port%>/secured
+        http://<%=host%>:<%=port%>/secured
     </pre>
 
     <p> 
@@ -135,8 +135,8 @@
     <ul>
     <% endPoints.forEach(function(endPoint){ %>
         <li>
-         <a href="http://<%=hostname%>:<%=port%>/secured/api/<%=endPoint%>"> 
-             http://<%=hostname%>:<%=port%>/secured/api/<%=endPoint%> 
+         <a href="http://<%=host%>:<%=port%>/secured/api/<%=endPoint%>"> 
+             http://<%=host%>:<%=port%>/secured/api/<%=endPoint%> 
         </a>
          </li>
     <% }) %>
@@ -173,20 +173,18 @@
         <ul>
             <% ["errors", "activities"].forEach(function(endPoint){ %>
                 <li>
-                 <a href="http://<%=hostname%>:<%=port%>/logs/<%=endPoint%>"> 
-                     http://<%=hostname%>:<%=port%>/logs/<%=endPoint%> 
+                 <a href="http://<%=host%>:<%=port%>/logs/<%=endPoint%>"> 
+                     http://<%=host%>:<%=port%>/logs/<%=endPoint%> 
                 </a>
                  </li>
             <% }) %>
              </ul>
 
 
-
-
     <h1>Upload a file</h1>
 
     <p>Access All files in /uploads directory
-        <a href="http://<%=hostname%>:<%=port%>/uploads">
+        <a href="http://<%=host%>:<%=port%>/uploads">
             Uploaded Files 
         </a>
     </p>
