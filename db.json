@@ -1,4 +1,29 @@
 {
+  "devices": [
+
+  ],
+  
+  "vendors": [
+
+  ],
+
+  "networks": [
+
+  ],
+
+  "apps": [
+
+  ],
+
+  "profiles": [
+
+  ],
+
+  "plants": [
+
+  ],
+
+
   "users": [
     {
       "id": 1,
@@ -103,6 +128,36 @@
       },
       "items": [],
       "id": 6
+    },
+    {
+      "name": "Your name",
+      "email": "you@example.com",
+      "phone": 2343432232,
+      "cartItems": [
+        {
+          "id": 13,
+          "name": "HTC Phone 10000",
+          "price": 123,
+          "qty": 1
+        }
+      ],
+      "amount": 123,
+      "id": 7
+    },
+    {
+      "name": "Test",
+      "email": "you@example.com",
+      "phone": 2343432232,
+      "cartItems": [
+        {
+          "id": 2353,
+          "name": "Product 2353",
+          "price": 21,
+          "qty": 1
+        }
+      ],
+      "amount": 21,
+      "id": 8
     }
   ],
   "brands": [
@@ -149,47 +204,13 @@
   ],
   "products": [
     {
-      "brandId": 1,
-      "camera": "5 MP AF with LED flash, geotagging",
-      "cpu": "528 MHz Qualcomm MSM7225",
-      "display": "3.2\" 240 x 320",
-      "gpu": null,
-      "id": 13,
-      "name": "HTC Phone 10000",
-      "os": "Android 2.1, upgradable to 2.2",
-      "ram": "384 MB",
-      "size": "78.6 cm3 106.8 x 60.4 x 12.2 mm",
-      "storage": "512 MB",
-      "weight": "118 g",
-      "year": 2010,
-      "price": 379,
-      "released": "2010-11-14T18:30:00.000Z"
-    },
-    {
-      "brandId": "9",
-      "camera": "5 MP AF with LED flash and geotagging, 720p HD video recording",
-      "cpu": "1 GHz Qualcomm QSD 8650 Scorpion (Snapdragon)",
-      "display": "4.0\" 480 x 800",
-      "gpu": "Adreno 200",
-      "id": 14,
-      "name": "LG Optimus 78",
-      "os": "Windows Phone 7",
-      "ram": "512 MB",
-      "size": "85.9 cm3 125 x 59.8 x 11.5 mm",
-      "storage": "16.5 GB",
-      "weight": "157 g",
-      "year": 2010,
-      "price": "222",
-      "released": "2011-01-01T18:30:00.000Z"
-    },
-    {
       "brandId": 3,
       "camera": "3.0 MP AF",
       "cpu": "600 MHz",
       "display": "3.2\" 320 x 480",
       "gpu": null,
       "id": 15,
-      "name": "LG Optimus One P5000",
+      "name": "LG Optimus One P5555",
       "os": "Android 2.2, upgradable to 2.3",
       "ram": "512 MB",
       "size": "89.1 cm3 113.5 x 59 x 13.3 mm",
@@ -206,7 +227,7 @@
       "display": "4.0\" 480 x 800 Super AMOLED",
       "gpu": "PowerVR SGX 540",
       "id": 16,
-      "name": "Samsung Galaxy S",
+      "name": "Product   New",
       "os": "Android 2.1",
       "ram": "512 MB",
       "size": "77.8 cm3",
@@ -1654,6 +1675,20 @@
       "year": 2020,
       "brandId": "5",
       "id": 109
+    },
+    {
+      "name": "MT 2018 Phone",
+      "price": 5000,
+      "year": 2018,
+      "brandId": "7",
+      "id": 110
+    },
+    {
+      "name": "New product 2018",
+      "price": 11111,
+      "year": 2018,
+      "brandId": "5",
+      "id": 111
     }
   ],
   "states": [
