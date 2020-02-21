@@ -1,29 +1,4 @@
 {
-  "devices": [
-
-  ],
-  
-  "vendors": [
-
-  ],
-
-  "networks": [
-
-  ],
-
-  "apps": [
-
-  ],
-
-  "profiles": [
-
-  ],
-
-  "plants": [
-
-  ],
-
-
   "users": [
     {
       "id": 1,
@@ -65,39 +40,8 @@
       "id": 4
     }
   ],
-  "catalogs": [
-    {
-      "name": "Interior 1",
-      "type": "t1",
-      "id": 1
-    }
-  ],
   "stores": [],
   "orders": [
-    {
-      "name": "Product  83172587",
-      "price": 9219,
-      "qty": 1,
-      "id": 1
-    },
-    {
-      "name": "Product  1634985",
-      "price": 1536,
-      "qty": 1,
-      "id": 2
-    },
-    {
-      "name": "Product  49689512",
-      "price": 2421,
-      "qty": 1,
-      "id": 3
-    },
-    {
-      "name": "Product  27760187",
-      "price": 9708,
-      "qty": 1,
-      "id": 4
-    },
     {
       "info": {
         "fullname": "krish",
