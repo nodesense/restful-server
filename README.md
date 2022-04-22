@@ -168,6 +168,15 @@ The below APIs must be having Authorization header with "JWT \" for all GET, POS
     http://localhost:7070/secured/api/stores
 
 
+## check if token is valid or not
+```
+GET http://localhost:7070/validate/token
+
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjEsImV4cCI6MTQ5ODY1ODY4NTc4Nn0.2IuvLDf_-ipiRwQFGGX4nPNAcE1VwlX0bcLThvlUP88-p":
+```
+
+if 200 OK means token is valid
+
 ## Check if field with value exist, unique username, product etc
 
 

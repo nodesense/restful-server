@@ -240,6 +240,11 @@ app.use(function(req, res, next){
      }
 })
 
+
+app.get("/validate/token", validateToken, (req, res) => {
+    res.json({valid: true})
+})
+
 app.use("/secured", validateToken)
 
 app.use(function(req, res, next){
